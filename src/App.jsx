@@ -7,6 +7,7 @@ import './login.css';
 import './menu.css';
 import { pizzas } from './Data/data';
 
+
 function App() {
   const [userName, setUserName] = useState('');
 
@@ -22,9 +23,14 @@ function App() {
           The best pizza.<br />
           <span className="text-yellow">Straight out of the oven, straight to you.</span>
         </h1>
-        <p className="sub-title">👋 Welcome! Please start by telling us your name:</p>
-        <Login onLogin={handleLogin} />
-        <Menu pizzas={pizzas} />
+        {!userName ? (
+          <>
+            <p className="sub-title">👋 Welcome! Please start by telling us your name:</p>
+            <Login onLogin={handleLogin} />
+          </>
+        ) : (
+          <Menu pizzas={pizzas} />
+        )}
       </main>
     </div>
   );

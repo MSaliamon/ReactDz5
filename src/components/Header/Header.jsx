@@ -6,7 +6,7 @@ function Header({ userName }) {
       <form>
         <input placeholder="Search for the order #" />
       </form>
-      {userName && <div className="user-name"> {userName}!</div>}
+      {userName && <div className="user-name">Hello, {userName}!</div>}
     </header>
   );
 }
