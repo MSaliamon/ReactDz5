@@ -1,17 +1,18 @@
 import Button from '../../Button/Button';
 
-const MenuItem = ({ item }) => {
-  const handleAddToCart = () => {
-    console.log(`Added ${item.name} to cart`);
-  };
-
+const MenuItem = ({ pizza }) => {
   return (
-    <div>
-      <h3>{item.name}</h3>
-      <p>{item.description}</p>
-      <p>{item.price}</p>
-      <Button onClick={handleAddToCart}>ADD TO CART</Button>
-    </div>
+    <li className="pizza">
+      <img src={pizza.imageUrl} alt={pizza.name} className="pizza__image" />
+      <div className="pizza__info">
+        <p className="pizza__name">{pizza.name}</p>
+        <p className="pizza__ingredients">{pizza.ingredients.join(', ')}</p>
+        <div className="pizza__actions">
+          <p className="pizza__price">{pizza.soldOut ? 'Sold out' : `€${pizza.unitPrice}`}</p>
+          {!pizza.soldOut && <Button onClick={() => console.log('ADD TO CART')}>Add to cart</Button>}
+        </div>
+      </div>
+    </li>
   );
 };
 

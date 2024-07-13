@@ -1,10 +1,13 @@
 
-const Header = ({ title }) => {
-    return (
-      <header>
-        <h1>{title}</h1>
-      </header>
-    );
-  };
-  
-  export default Header;
+const Header = () => {
+  return (
+    <header className="header">
+      <a className="logo" href="/">Pizza Day</a>
+      <form>
+        <input placeholder="Search for the order #" />
+      </form>
+    </header>
+  );
+};
+
+export default Header;

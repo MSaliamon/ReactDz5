@@ -1,12 +1,12 @@
 import MenuItem from '../MenuItem/MenuItem';
 
-const MenuList = ({ items }) => {
+const MenuList = ({ pizzas }) => {
   return (
-    <div>
-      {items.map(item => (
-        <MenuItem key={item.id} item={item} />
+    <ul>
+      {pizzas.map((pizza) => (
+        <MenuItem key={pizza.id} pizza={pizza} />
       ))}
-    </div>
+    </ul>
   );
 };
 

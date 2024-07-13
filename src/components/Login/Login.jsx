@@ -3,19 +3,22 @@ import Button from '../Button/Button';
 import Input from '../Input/Input';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
-  const handleLogin = () => {
-    console.log('Logging in with', { username, password });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(`User's name: ${name}`);
   };
 
   return (
-    <div>
-      <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-      <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <Button onClick={handleLogin}>Login</Button>
-    </div>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <Input
+        placeholder="Your full name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <Button>Login</Button>
+    </form>
   );
 };
 
