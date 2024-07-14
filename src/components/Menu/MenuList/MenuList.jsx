@@ -1,13 +1,13 @@
 import MenuItem from '../MenuItem/MenuItem';
 
-const MenuList = ({ pizzas }) => {
+function MenuList({ pizzas }) {
   return (
     <ul>
-      {pizzas.map((pizza) => (
+      {pizzas.map(pizza => (
         <MenuItem key={pizza.id} pizza={pizza} />
       ))}
     </ul>
   );
-};
+}
 
 export default MenuList;
