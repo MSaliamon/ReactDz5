@@ -1,5 +1,4 @@
 import LoginForm from './LoginForm';
-
 const Content = () => {
   return (
     <main className="content">

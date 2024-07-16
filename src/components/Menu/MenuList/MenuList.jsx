@@ -1,5 +1,4 @@
 import MenuItem from '../MenuItem/MenuItem';
-
 const MenuList = ({ pizzas }) => (
   <ul className="menu-list">
     {pizzas.map(pizza => (

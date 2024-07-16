@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
-
-
 function MenuItem({ pizza }) {
   const [quantity, setQuantity] = useState(0);
-
   const handleAddClick = () => {
     setQuantity(1);
   };
-
   const handleIncrementClick = () => {
     setQuantity(prevQuantity => prevQuantity + 1);
   };
-
   const handleDecrementClick = () => {
     setQuantity(prevQuantity => Math.max(0, prevQuantity - 1));
   };
-
   const handleDeleteClick = () => {
     setQuantity(0);
   };
-
   return (
     <li className="pizza">
       <img src={pizza.imageUrl} alt={pizza.name} className="pizza__image" />
@@ -43,5 +36,4 @@ function MenuItem({ pizza }) {
     </li>
   );
 }
-
 export default MenuItem;

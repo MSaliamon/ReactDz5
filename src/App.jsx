@@ -2,20 +2,15 @@ import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import Menu from './components/Menu/Menu';
-import { pizzas } from './Data/data';
 import './index.css';
 import './login.css';
 import './menu.css';
 
-
-
 function App() {
   const [userName, setUserName] = useState('');
-
   function handleLogin(name) {
     setUserName(name);
   }
-
   return (
     <div className="wrapper">
       <Header userName={userName} />
@@ -36,5 +31,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

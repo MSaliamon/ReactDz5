@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import MenuList from './MenuList/MenuList';
-
-
-
-
 function Menu() {
   const [pizzas, setPizzas] = useState([]);
-
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
@@ -20,10 +15,8 @@ function Menu() {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchPizzas();
   }, []);
-
   return (
     <div className="menu">
       <h2>Menu</h2>
