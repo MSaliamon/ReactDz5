@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import Menu from './components/Menu/Menu';
+import { pizzas } from './Data/data';
 import './index.css';
 import './login.css';
 import './menu.css';
-import { pizzas } from './Data/data';
+
 
 
 function App() {
   const [userName, setUserName] = useState('');
 
-  const handleLogin = (name) => {
+  function handleLogin(name) {
     setUserName(name);
-  };
+  }
 
   return (
     <div className="wrapper">
@@ -29,7 +30,7 @@ function App() {
             <Login onLogin={handleLogin} />
           </>
         ) : (
-          <Menu pizzas={pizzas} />
+          <Menu />
         )}
       </main>
     </div>

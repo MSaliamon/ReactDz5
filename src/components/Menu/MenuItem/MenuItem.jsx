@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 function MenuItem({ pizza }) {
   const [quantity, setQuantity] = useState(0);
 
@@ -21,14 +22,14 @@ function MenuItem({ pizza }) {
 
   return (
     <li className="pizza">
-      <img src={pizza.imageUrl} className="pizza__image" alt={pizza.name} />
+      <img src={pizza.imageUrl} alt={pizza.name} className="pizza__image" />
       <div className="pizza__info">
         <p className="pizza__name">{pizza.name}</p>
         <p className="pizza__ingredients">{pizza.ingredients.join(', ')}</p>
         <div className="pizza__actions">
           <p className="pizza__price">€{pizza.unitPrice}</p>
           {quantity === 0 ? (
-            <button className="button" onClick={handleAddClick}>Add to cart</button>
+            <button className="button" onClick={handleAddClick}>Add to Cart</button>
           ) : (
             <div>
               <button className="button" onClick={handleIncrementClick}>+</button>
