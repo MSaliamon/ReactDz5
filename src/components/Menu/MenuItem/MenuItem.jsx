@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../../redux/CartSlice';
-
 function MenuItem({ pizza }) {
   const dispatch = useDispatch();
   const handleAddClick = () => {
