@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import MenuList from './MenuList/MenuList';
+import React, { useState, useEffect } from 'react';
+import MenuList from '../components/Menu/MenuList/MenuList';
+import { Link } from 'react-router-dom';
 function Menu() {
   const [pizzas, setPizzas] = useState([]);
   useEffect(() => {
@@ -21,8 +22,10 @@ function Menu() {
     <div className="menu">
       <h2>Menu</h2>
       <MenuList pizzas={pizzas} />
+      <Link to="/cart">
+        <button className="button buy-button">Buy</button>
+      </Link>
     </div>
   );
 }
-
 export default Menu;

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 function Header({ userName }) {
   return (
     <header className="header">
@@ -5,9 +6,9 @@ function Header({ userName }) {
       <form>
         <input placeholder="Search for the order #" />
       </form>
-      {userName && <div className="user-name"> {userName}</div>}
+      {userName && <div className="user-name">Hello, {userName}!</div>}
+      <Link to="/cart" className="cart-link">Cart</Link>
     </header>
   );
 }
-
 export default Header;
