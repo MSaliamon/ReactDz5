@@ -1,19 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeFromCart, updateQuantity } from '../redux/CartSlice';
+import CartItem from '../components/CartItem/CartItem';
 const Cart = () => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
   };
-  const handleIncrementQuantity = (id) => {
-    const item = cart.find(item => item.id === id);
-    dispatch(updateQuantity({ itemId: id, quantity: item.quantity + 1 }));
+  const handleIncrementQuantity = (item) => {
+    dispatch(updateQuantity({ itemId: item.id, quantity: item.quantity + 1 }));
   };
-  const handleDecrementQuantity = (id) => {
-    const item = cart.find(item => item.id === id);
-    dispatch(updateQuantity({ itemId: id, quantity: item.quantity - 1 }));
+  const handleDecrementQuantity = (item) => {
+    if (item.quantity === 1) {
+      dispatch(removeFromCart(item.id));
+    } else {
+      dispatch(updateQuantity({ itemId: item.id, quantity: item.quantity - 1 }));
+    }
   };
   return (
     <div>
@@ -21,13 +24,13 @@ const Cart = () => {
       <h1>Your Cart</h1>
       <ul>
         {cart.map(item => (
-          <li key={item.id}>
-            {item.quantity}x {item.name} €{(item.unitPrice * item.quantity).toFixed(2)}
-            <button onClick={() => handleDecrementQuantity(item.id)}>-</button>
-            <span>{item.quantity}</span>
-            <button onClick={() => handleIncrementQuantity(item.id)}>+</button>
-            <button onClick={() => handleRemoveItem(item.id)}>Delete</button>
-          </li>
+          <CartItem
+            key={item.id}
+            item={item}
+            onRemove={handleRemoveItem}
+            onIncrement={handleIncrementQuantity}
+            onDecrement={handleDecrementQuantity}
+          />
         ))}
       </ul>
     </div>

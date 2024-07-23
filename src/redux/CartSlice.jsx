@@ -1,4 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+export const fetchPizzas = createAsyncThunk(
+  'menu/fetchPizzas',
+  async () => {
+    const response = await fetch('https://react-fast-pizza-api.onrender.com/api/menu');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.data;
+  }
+);
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
@@ -20,11 +31,7 @@ const cartSlice = createSlice({
       const { itemId, quantity } = action.payload;
       const item = state.items.find(item => item.id === itemId);
       if (item) {
-        if (quantity <= 0) {
-          state.items = state.items.filter(item => item.id !== itemId);
-        } else {
-          item.quantity = quantity;
-        }
+        item.quantity = quantity > 0 ? quantity : 1;
       }
     }
   }

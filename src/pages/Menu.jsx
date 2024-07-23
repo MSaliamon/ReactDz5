@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import MenuList from '../components/Menu/MenuList/MenuList';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPizzas } from '../redux/CartSlice';
 function Menu() {
-  const [pizzas, setPizzas] = useState([]);
+  const dispatch = useDispatch();
+  const pizzas = useSelector(state => state.menu.pizzas);
+
   useEffect(() => {
-    const fetchPizzas = async () => {
-      try {
-        const response = await fetch('https://react-fast-pizza-api.onrender.com/api/menu');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setPizzas(data.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchPizzas();
-  }, []);
+    dispatch(fetchPizzas());
+  }, [dispatch]);
+
   return (
     <div className="menu">
       <h2>Menu</h2>
@@ -28,4 +21,5 @@ function Menu() {
     </div>
   );
 }
+
 export default Menu;
