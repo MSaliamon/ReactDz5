@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
 export const fetchPizzas = createAsyncThunk(
   'menu/fetchPizzas',
   async () => {
@@ -11,7 +10,6 @@ export const fetchPizzas = createAsyncThunk(
     return data.data;
   }
 );
-
 const menuSlice = createSlice({
   name: 'menu',
   initialState: {
@@ -34,5 +32,4 @@ const menuSlice = createSlice({
       });
   },
 });
-
 export default menuSlice.reducer;

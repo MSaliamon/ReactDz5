@@ -6,11 +6,9 @@ import { fetchPizzas } from '../redux/CartSlice';
 function Menu() {
   const dispatch = useDispatch();
   const pizzas = useSelector(state => state.menu.pizzas);
-
   useEffect(() => {
     dispatch(fetchPizzas());
   }, [dispatch]);
-
   return (
     <div className="menu">
       <h2>Menu</h2>
@@ -21,5 +19,4 @@ function Menu() {
     </div>
   );
 }
-
 export default Menu;
