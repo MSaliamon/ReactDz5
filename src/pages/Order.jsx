@@ -5,26 +5,31 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '../components/Input/Input';
 const orderSchema = z.object({
   userName: z.string().min(1, 'User name is required'),
-  phone: z.string().min(1, 'Phone number is required'),
+  phone: z.string().min(10, 'Phone number is required').regex(/^\d+$/, 'Phone number must contain only digits'),
   address: z.string().min(1, 'Address is required'),
   priority: z.boolean(),
 });
+
 const Order = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = cartItems.reduce((total, item) => total + item.quantity * item.unitPrice, 0);
+
   const defaultValues = {
     userName: '',
     phone: '',
     address: '',
     priority: false,
   };
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues,
     resolver: zodResolver(orderSchema),
   });
+
   const onSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <div className="order-form">
       <h2>Order Information</h2>
@@ -76,4 +81,5 @@ const Order = () => {
     </div>
   );
 };
+
 export default Order;
