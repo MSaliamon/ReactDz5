@@ -6,14 +6,17 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Provider } from 'react-redux';
 import store from './redux/Store';
 import Menu from './pages/Menu';
+import Order from './pages/Order';
 import './index.css';
 import './login.css';
 import './menu.css';
 function App() {
   const [userName, setUserName] = useState('');
+
   function handleLogin(name) {
     setUserName(name);
   }
+
   return (
     <Provider store={store}>
       <Router basename='/ReactDz5'>
@@ -28,6 +31,7 @@ function App() {
               <Route path="/" element={!userName ? <Login onLogin={handleLogin} /> : <Navigate to="/menu" />} />
               <Route path="/menu" element={userName ? <Menu /> : <Navigate to="/" />} />
               <Route path="/cart" element={userName ? <Cart /> : <Navigate to="/" />} />
+              <Route path="/order/new" element={userName ? <Order /> : <Navigate to="/" />} />
             </Routes>
           </main>
         </div>
@@ -35,4 +39,5 @@ function App() {
     </Provider>
   );
 }
+
 export default App;

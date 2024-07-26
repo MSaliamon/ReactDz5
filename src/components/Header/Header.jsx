@@ -8,6 +8,7 @@ function Header({ userName }) {
       </form>
       {userName && <div className="user-name">{userName}</div>}
       <Link to="/cart" className="cart-link">Cart</Link>
+      <Link to="/order/new" className="order-link">New Order</Link>
     </header>
   );
 }
