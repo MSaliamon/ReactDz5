@@ -1,9 +1,27 @@
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Input from '../components/Input/Input';
+const orderSchema = z.object({
+  userName: z.string().min(1, 'User name is required'),
+  phone: z.string().min(1, 'Phone number is required'),
+  address: z.string().min(1, 'Address is required'),
+  priority: z.boolean(),
+});
 const Order = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = cartItems.reduce((total, item) => total + item.quantity * item.unitPrice, 0);
+  const defaultValues = {
+    userName: '',
+    phone: '',
+    address: '',
+    priority: false,
+  };
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues,
+    resolver: zodResolver(orderSchema),
+  });
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -14,9 +32,10 @@ const Order = () => {
         <div>
           <label>
             User Name:
-            <input
+            <Input
               type="text"
-              {...register('userName', { required: 'User name is required' })}
+              placeholder="Your full name"
+              {...register('userName')}
             />
             {errors.userName && <span className="error">{errors.userName.message}</span>}
           </label>
@@ -24,9 +43,10 @@ const Order = () => {
         <div>
           <label>
             Phone:
-            <input
+            <Input
               type="text"
-              {...register('phone', { required: 'Phone number is required' })}
+              placeholder="Your phone number"
+              {...register('phone')}
             />
             {errors.phone && <span className="error">{errors.phone.message}</span>}
           </label>
@@ -34,9 +54,10 @@ const Order = () => {
         <div>
           <label>
             Address:
-            <input
+            <Input
               type="text"
-              {...register('address', { required: 'Address is required' })}
+              placeholder="Your address"
+              {...register('address')}
             />
             {errors.address && <span className="error">{errors.address.message}</span>}
           </label>
@@ -44,7 +65,7 @@ const Order = () => {
         <div>
           <label>
             Priority:
-            <input
+            <Input
               type="checkbox"
               {...register('priority')}
             />
