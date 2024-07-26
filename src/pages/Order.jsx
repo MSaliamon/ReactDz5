@@ -43,7 +43,7 @@ const Order = () => {
         </div>
         <div>
           <label>
-            Priority:
+            What to yo give your order priority
             <input
               type="checkbox"
               {...register('priority')}
