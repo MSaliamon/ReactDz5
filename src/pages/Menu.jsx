@@ -19,7 +19,7 @@ const Menu = () => {
   return (
     <div className="menu">
       <h2>Menu</h2>
-      <MenuList pizzas={pizzas} /> {/* використовуємо MenuList */}
+      <MenuList pizzas={pizzas} /> 
       <Link to="/cart">
         <button className="button buy-button">Buy</button>
       </Link>
