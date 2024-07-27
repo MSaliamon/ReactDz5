@@ -2,7 +2,9 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input/Input';
+
 const orderSchema = z.object({
   userName: z.string().min(1, 'User name is required'),
   phone: z.string().min(10, 'Phone number is required').regex(/^\d+$/, 'Phone number must contain only digits'),
@@ -13,6 +15,7 @@ const orderSchema = z.object({
 const Order = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = cartItems.reduce((total, item) => total + item.quantity * item.unitPrice, 0);
+  const navigate = useNavigate();
 
   const defaultValues = {
     userName: '',
@@ -26,8 +29,40 @@ const Order = () => {
     resolver: zodResolver(orderSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const orderData = {
+      address: data.address,
+      customer: data.userName,
+      phone: data.phone,
+      priority: data.priority,
+      position: "",
+      cart: cartItems.map(item => ({
+        name: item.name,
+        pizzaId: item.id,
+        quantity: item.quantity,
+        totalPrice: item.quantity * item.unitPrice,
+        unitPrice: item.unitPrice,
+      })),
+    };
+
+    try {
+      const response = await fetch('https://react-fast-pizza-api.onrender.com/api/order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        navigate(`/order/${result.data.id}`);
+      } else {
+        console.error('Something went wrong');
+      }
+    } catch (error) {
+      console.error('Something went wrong', error);
+    }
   };
 
   return (
