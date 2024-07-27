@@ -31,7 +31,6 @@ const OrderDetails = () => {
           },
           body: JSON.stringify({ priority: true }),
         });
-  
         const data = await response.json();
         console.log('Response data:', data);
         if (data.status === 'success') {
@@ -66,8 +65,8 @@ const OrderDetails = () => {
             </li>
           ))}
         </ul>
-        <p>Order Price: €{order.orderPrice.toFixed(2)}</p>
         {order.priority && <p>Priority Price: €{order.priorityPrice.toFixed(2)}</p>}
+        <p>Order Price: €{(order.orderPrice + (order.priorityPrice || 0)).toFixed(2)}</p>
         {!order.priority && (
           <button onClick={handleAddPriority} className="button">
             Add Priority
