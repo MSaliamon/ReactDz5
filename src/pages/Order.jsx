@@ -4,31 +4,26 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input/Input';
-
 const orderSchema = z.object({
   userName: z.string().min(1, 'User name is required'),
   phone: z.string().min(10, 'Phone number is required').regex(/^\d+$/, 'Phone number must contain only digits'),
   address: z.string().min(1, 'Address is required'),
   priority: z.boolean(),
 });
-
 const Order = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = cartItems.reduce((total, item) => total + item.quantity * item.unitPrice, 0);
   const navigate = useNavigate();
-
   const defaultValues = {
     userName: '',
     phone: '',
     address: '',
     priority: false,
   };
-
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues,
     resolver: zodResolver(orderSchema),
   });
-
   const onSubmit = async (data) => {
     const orderData = {
       address: data.address,
@@ -44,7 +39,6 @@ const Order = () => {
         unitPrice: item.unitPrice,
       })),
     };
-
     try {
       const response = await fetch('https://react-fast-pizza-api.onrender.com/api/order', {
         method: 'POST',
@@ -64,7 +58,6 @@ const Order = () => {
       console.error('Something went wrong', error);
     }
   };
-
   return (
     <div className="order-form">
       <h2>Order Information</h2>
@@ -116,5 +109,4 @@ const Order = () => {
     </div>
   );
 };
-
 export default Order;
