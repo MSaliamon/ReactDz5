@@ -1,0 +1,42 @@
+.order-details {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .order-details h2 {
+    text-align: center;
+  }
+  
+  .order-details p {
+    margin: 10px 0;
+  }
+  
+  .priority {
+    background-color: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  
+  .status {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .order-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .order-details ul li {
+    margin: 5px 0;
+  }
+  
+  .order-details p:last-child {
+    font-weight: bold;
+  }

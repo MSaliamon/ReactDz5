@@ -31,8 +31,8 @@ function App() {
               <Route path="/" element={!userName ? <Login onLogin={handleLogin} /> : <Navigate to="/menu" />} />
               <Route path="/menu" element={userName ? <Menu /> : <Navigate to="/" />} />
               <Route path="/cart" element={userName ? <Cart /> : <Navigate to="/" />} />
-              <Route path="/order/new" element={userName ? <Order /> : <Navigate to="/" />} /> {/* Новий роут */}
-              <Route path="/order/:id" element={userName ? <OrderDetails /> : <Navigate to="/" />} /> {/* Новий роут */}
+              <Route path="/order/new" element={userName ? <Order /> : <Navigate to="/" />} /> 
+              <Route path="/order/:id" element={userName ? <OrderDetails /> : <Navigate to="/" />} /> 
             </Routes>
           </main>
         </div>
