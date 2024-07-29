@@ -6,14 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input/Input';
 import { useDispatch } from 'react-redux';
 import { createOrder } from '../redux/OrderSlice';
-
 const orderSchema = z.object({
   userName: z.string().min(1, 'User name is required'),
   phone: z.string().min(10, 'Phone number is required').regex(/^\d+$/, 'Phone number must contain only digits'),
   address: z.string().min(1, 'Address is required'),
   priority: z.boolean(),
 });
-
 const Order = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(orderSchema),
@@ -24,7 +22,6 @@ const Order = () => {
       priority: false,
     },
   });
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.items);
@@ -44,7 +41,6 @@ const Order = () => {
         totalPrice: item.quantity * item.unitPrice,
       })),
     };
-
     const resultAction = await dispatch(createOrder(orderData));
     if (createOrder.fulfilled.match(resultAction)) {
       const orderId = resultAction.payload.id;
@@ -53,7 +49,6 @@ const Order = () => {
       console.error('Order creation failed:', resultAction.payload);
     }
   };
-
   return (
     <div className="order-form">
       <h2>Order Information</h2>
@@ -105,5 +100,4 @@ const Order = () => {
     </div>
   );
 };
-
 export default Order;

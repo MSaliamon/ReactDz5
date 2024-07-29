@@ -9,5 +9,4 @@ const store = configureStore({
     order: orderReducer,
   },
 });
-
 export default store;

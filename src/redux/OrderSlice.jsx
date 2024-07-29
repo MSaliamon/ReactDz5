@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-// Ваші асинхронні функції (вже є у вас)
 export const fetchOrderById = createAsyncThunk(
   'order/fetchOrderById',
   async (orderId, { rejectWithValue }) => {
@@ -17,7 +15,6 @@ export const fetchOrderById = createAsyncThunk(
     }
   }
 );
-
 export const updateOrderPriority = createAsyncThunk(
   'order/updateOrderPriority',
   async (orderId, { rejectWithValue }) => {
@@ -40,8 +37,6 @@ export const updateOrderPriority = createAsyncThunk(
     }
   }
 );
-
-// Експортуйте createOrder
 export const createOrder = createAsyncThunk(
   'order/createOrder',
   async (orderData, { rejectWithValue }) => {
@@ -62,7 +57,6 @@ export const createOrder = createAsyncThunk(
     }
   }
 );
-
 const orderSlice = createSlice({
   name: 'order',
   initialState: {
@@ -96,5 +90,4 @@ const orderSlice = createSlice({
       });
   },
 });
-
 export default orderSlice.reducer;

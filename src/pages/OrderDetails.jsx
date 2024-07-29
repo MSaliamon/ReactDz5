@@ -7,14 +7,11 @@ const OrderDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const order = useSelector((state) => state.order.order);
   const error = useSelector((state) => state.order.error);
-
   useEffect(() => {
     dispatch(fetchOrderById(id));
   }, [dispatch, id]);
-
   const handleAddPriority = async () => {
     const resultAction = await dispatch(updateOrderPriority(id));
     if (updateOrderPriority.fulfilled.match(resultAction)) {
@@ -23,16 +20,12 @@ const OrderDetails = () => {
       console.error('Failed to update priority:', resultAction.payload);
     }
   };
-
   if (error) {
     return <div>{error}</div>;
   }
-
   if (!order) {
     return <div>Loading...</div>;
   }
-
-  // Calculate the total price including priority
   const totalPrice = order.cart.reduce((total, item) => total + item.totalPrice, 0);
   const totalWithPriority = order.priority ? totalPrice + order.priorityPrice : totalPrice;
 
@@ -63,5 +56,4 @@ const OrderDetails = () => {
     </div>
   );
 };
-
 export default OrderDetails;
